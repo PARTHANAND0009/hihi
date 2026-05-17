@@ -43,6 +43,7 @@ literally just:
 - the ambient sounds are fake/generated  they're not real recordings. they sound okay though imo
 - the youtube player is just an embed so all the normal youtube stuff applies (some videos can't be embedded, etc)
 - it works best on desktop. i did add some basic responsive stuff but like... it's a study app, you're probably on a laptop
+- used claude for debugging
 
 ---
 
