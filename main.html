@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyNook 🎧</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- google fonts, i kept going back and forth between these two lol -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+  <header class="topbar">
+    <div class="logo">studynook<span class="dot">.</span></div>
+    <div class="session-info">
+      <span id="session-label">no session yet</span>
+      <span class="sep">|</span>
+      <span id="current-time">--:--</span>
+    </div>
+  </header>
+
+  <main class="app-grid">
+
+
+    <div class="left-col">
+
+
+      <section class="card pomo-card">
+        <div class="card-header">
+          <h2>pomodoro</h2>
+
+          <div class="pomo-modes">
+            <button class="mode-btn active" data-mode="focus" data-time="25">focus</button>
+            <button class="mode-btn" data-mode="short" data-time="5">short break</button>
+            <button class="mode-btn" data-mode="long" data-time="15">long break</button>
+          </div>
+        </div>
+
+
+        <div class="timer-display">
+          <svg class="timer-ring" viewBox="0 0 200 200">
+            <circle class="ring-bg" cx="100" cy="100" r="88"/>
+            <circle class="ring-progress" id="ring-progress" cx="100" cy="100" r="88"
+              stroke-dasharray="553"
+              stroke-dashoffset="0"
+            />
+          </svg>
+          <div class="timer-text">
+            <span id="timer-min">25</span><span class="colon">:</span><span id="timer-sec">00</span>
+          </div>
+        </div>
+
+        <div class="pomo-controls">
+          <button class="ctrl-btn" id="pomo-reset" title="reset">↺</button>
+          <button class="ctrl-btn primary" id="pomo-start">start</button>
+          <button class="ctrl-btn" id="pomo-skip" title="skip">⇥</button>
+        </div>
+
+
+        <div class="session-dots" id="session-dots">
+          <span class="sdot"></span>
+          <span class="sdot"></span>
+          <span class="sdot"></span>
+          <span class="sdot"></span>
+        </div>
+        <p class="sessions-done" id="sessions-done-text">0 sessions done today</p>
+      </section>
+
+      <section class="card notes-card">
+        <div class="card-header">
+          <h2>notes</h2>
+          <div class="notes-actions">
+            <button class="tiny-btn" id="notes-clear" title="clear all">clear</button>
+            <button class="tiny-btn" id="notes-copy" title="copy to clipboard">copy</button>
+          </div>
+        </div>
+        <!-- the actual textarea, nothing fancy -->
+        <textarea
+          id="notes-area"
+          placeholder="jot something down... this saves automatically btw"
+          spellcheck="true"
+        ></textarea>
+        <div class="notes-footer">
+          <span id="word-count">0 words</span>
+          <span id="save-status">saved ✓</span>
+        </div>
+      </section>
+
+    </div>
+
+
+    <div class="right-col">
+
+
+      <section class="card music-card">
+        <div class="card-header">
+          <h2>music 🎧</h2>
+
+          <div class="music-tabs">
+            <button class="tab-btn active" data-tab="lofi">lofi picks</button>
+            <button class="tab-btn" data-tab="custom">add url</button>
+          </div>
+        </div>
+
+
+        <div class="tab-content active" id="tab-lofi">
+          <div class="playlist">
+            <!-- these are all youtube embed IDs, picked a few good ones -->
+            <div class="track active" data-vid="jfKfPfyJRdk">
+              <div class="track-icon">▶</div>
+              <div class="track-info">
+                <span class="track-name">lofi hip hop radio – beats to study</span>
+                <span class="track-src">lofi girl</span>
+              </div>
+              <div class="track-dur">live</div>
+            </div>
+            <div class="track" data-vid="Na0w3Mz46GA">
+              <div class="track-icon">▶</div>
+              <div class="track-info">
+                <span class="track-name">late night study beats</span>
+                <span class="track-src">chillhop</span>
+              </div>
+              <div class="track-dur">live</div>
+            </div>
+            <div class="track" data-vid="5qap5aO4i9A">
+              <div class="track-icon">▶</div>
+              <div class="track-info">
+                <span class="track-name">lofi hip hop – calm &amp; chill</span>
+                <span class="track-src">lofi girl</span>
+              </div>
+              <div class="track-dur">live</div>
+            </div>
+            <div class="track" data-vid="DWcJFNfaw9c">
+              <div class="track-icon">▶</div>
+              <div class="track-info">
+                <span class="track-name">coffee shop jazz</span>
+                <span class="track-src">yellowbrick</span>
+              </div>
+              <div class="track-dur">live</div>
+            </div>
+            <div class="track" data-vid="lTRiuFIWV54">
+              <div class="track-icon">▶</div>
+              <div class="track-info">
+                <span class="track-name">study music – focus beats</span>
+                <span class="track-src">ambient worlds</span>
+              </div>
+              <div class="track-dur">live</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- custom url tab -->
+        <div class="tab-content" id="tab-custom">
+          <div class="custom-url-form">
+            <input type="text" id="yt-url-input" placeholder="paste a youtube url here..." />
+            <button id="yt-url-load">load</button>
+          </div>
+          <p class="hint-text">works with any youtube link man — music, playlist, whatever you like</p>
+        </div>
+
+
+        <div class="player-embed" id="player-embed">
+          <div class="embed-topbar">
+            <span id="now-playing-label">now playing</span>
+            <div class="embed-controls-row">
+              <label class="toggle-label">
+                <input type="checkbox" id="show-video-toggle" />
+                <span class="toggle-text">show video</span>
+              </label>
+              <button class="tiny-btn" id="close-player">✕</button>
+            </div>
+          </div>
+
+          <div class="yt-wrapper" id="yt-wrapper">
+            <iframe
+              id="yt-iframe"
+              src=""
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              frameborder="0"
+            ></iframe>
+          </div>
+
+          <!-- fake audio visualizer because why not -->
+          <div class="visualizer" id="visualizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="card ambient-card">
+        <div class="card-header">
+          <h2>ambient sounds</h2>
+          <span class="card-sub">mix and match</span>
+        </div>
+        <div class="ambient-grid">
+          <button class="amb-btn" data-sound="rain" title="rain">
+            <span class="amb-icon">🌧️</span>
+            <span>rain</span>
+          </button>
+          <button class="amb-btn" data-sound="fire" title="fireplace">
+            <span class="amb-icon">🔥</span>
+            <span>fire</span>
+          </button>
+          <button class="amb-btn" data-sound="cafe" title="cafe noise">
+            <span class="amb-icon">☕</span>
+            <span>café</span>
+          </button>
+          <button class="amb-btn" data-sound="forest" title="forest">
+            <span class="amb-icon">🌲</span>
+            <span>forest</span>
+          </button>
+          <button class="amb-btn" data-sound="white" title="white noise">
+            <span class="amb-icon">〰️</span>
+            <span>white noise</span>
+          </button>
+          <button class="amb-btn" data-sound="waves" title="ocean waves">
+            <span class="amb-icon">🌊</span>
+            <span>waves</span>
+          </button>
+        </div>
+
+        <div class="amb-volume">
+          <span>vol</span>
+          <input type="range" id="amb-vol" min="0" max="100" value="40" />
+          <span id="amb-vol-label">40%</span>
+        </div>
+        <p class="hint-text">ambient sounds are simulated — pair with music for best vibe</p>
+      </section>
+
+    </div>
+  </main>
+
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
